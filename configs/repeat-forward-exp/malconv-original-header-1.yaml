@@ -12,7 +12,6 @@ data:
 save_dir: '/app/outputs/repeat-forward-exp'    # Location to save the computed table
 
     
-
 ### Certification data settings
 use_gpu: True                  # If use gpu to compute
 num_samples: 1                 # Number of samples
@@ -22,4 +21,7 @@ batch_size: 10                 # Batch size when computing
 num_workers: 12
 
 ### Certify method settings
-certify_kwargs: {'alpha': 0.05, 'num_samples_pred': 1, 'num_samples_bound': 1}
+certify_kwargs: 
+  alpha: 0.05
+  num_samples_pred: 1
+  num_samples_bound: 1

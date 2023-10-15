@@ -14,8 +14,8 @@ save_dir: '/app/outputs/repeat-forward-exp'    # Location to save the computed t
 
 ### Certification data settings
 use_gpu: True                  # If use gpu to compute
-num_samples: 50              # Number of samples
+num_samples: 50                # Number of samples
 sample_seed: 42                # Seed to draw sample
 verbose: 0                     # Verbosity of the process
-batch_size: 16                # Batch size when computing
+batch_size: 16                 # Batch size when computing
 num_workers: 12

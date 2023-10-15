@@ -16,10 +16,10 @@ checkpoint_dir: '/app/outputs/models/checkpoint'
 ### Training parameter
 seed: 42
 use_gpu: True
-cpu_threads: null         # Numbe of CPU threads to use, null to use maximum number
-num_workers: null            # Number of cores to use for data loader! 
+cpu_threads: null         # Number of CPU threads to use, null to use maximum number
+num_workers: null         # Number of cores to use for data loader! 
 display_step: 5           # Std output update rate during training
-max_epoch: 2            # Number of steps to train
+max_epoch: 2              # Number of steps to train
 test_epoch: 2             # Test per n step
 max_early_stop: 5         # Number of validation steps performed without improvement before the training process is stopped
 

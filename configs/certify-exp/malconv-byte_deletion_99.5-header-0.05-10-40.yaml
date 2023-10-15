@@ -7,7 +7,7 @@ ckpt: '/app/outputs/models/checkpoint/malconv-byte_deletion_99.5_sd_42.ckpt'
 ### Location of data path (leave as null to use default validation set)
 data:
   csv: '/app/data/test.csv'
-  path: 'data/binaries'
+  path: '/app/data/binaries'
 
 save_dir: '/app/outputs/certify-exp/tables'    # Location to save the computed table
 log_dir: '/app/outputs/certify-exp/log'
