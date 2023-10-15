@@ -1,0 +1,28 @@
+### The name of the (certification) experiment/model
+name: 'malconv-insn_deletion_99.5-0.05-10-40'
+
+### Location to read ckpt
+ckpt: '/app/outputs/models/checkpoint/malconv-insn_deletion_99.5_sd_42.ckpt'
+
+### Location of data path (leave as null to use default validation set)
+data:
+  csv: '/app/data/test.csv'
+  path: '/app/data/binaries'
+
+save_dir: '/app/outputs/certify-exp/tables'    # Location to save the computed table
+log_dir: '/app/outputs/certify-exp/log'
+
+### Certification data settings
+use_gpu: True                  # If use gpu to compute
+eval_size: null                # Data size to apply certification (null to disable, not recommended)
+sample_seed: 42                # Seed to draw sample
+verbose: 0                     # Verbosity of the process
+batch_size: 512                # Batch size when computing
+num_workers: 12
+
+### Certify method settings
+certify_kwargs:
+  alpha: 0.05
+  num_samples_pred: 10
+  num_samples_bound: 40
+  abstain: -0.1

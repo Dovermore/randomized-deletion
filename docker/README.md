@@ -1,0 +1,3 @@
+- Run `deploy.py` to start the Docker container.
+- Install `nvidia-container-runtime`, `nvidia-docker2` to run with GPU
+    - Guide: [link](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)

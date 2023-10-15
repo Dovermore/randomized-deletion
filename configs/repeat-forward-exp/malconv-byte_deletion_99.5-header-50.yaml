@@ -1,0 +1,21 @@
+### The name of the (certification) experiment/model
+name: 'malconv-byte_deletion_99.5-50'
+
+### Location to read ckpt
+ckpt: '/app/outputs/models/checkpoint/malconv-byte_deletion_99.5_sd_42.ckpt'
+
+### Location of data path (leave as null to use default validation set)
+data:
+  csv: '/app/data/test.csv'
+  path: '/app/data/binaries'
+
+save_dir: '/app/outputs/repeat-forward-exp'    # Location to save the computed table
+
+
+### Certification data settings
+use_gpu: True                  # If use gpu to compute
+num_samples: 50              # Number of samples
+sample_seed: 42                # Seed to draw sample
+verbose: 0                     # Verbosity of the process
+batch_size: 64                # Batch size when computing
+num_workers: 12

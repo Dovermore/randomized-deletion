@@ -1,0 +1,55 @@
+exp_name: 'malconv-insn_deletion_99.5'
+
+### Data path
+train_data:
+  csv: '/app/data/train.csv'
+  path: '/app/data/binaries/'
+valid_data:
+  csv: '/app/data/valid.csv'
+  path: '/app/data/binaries/'
+
+### output path
+log_dir: '/app/outputs/models/log'
+pred_dir: '/app/outputs/models/pred'
+checkpoint_dir: '/app/outputs/models/checkpoint'
+
+### Training parameter
+seed: 42
+use_gpu: True
+cpu_threads: null         # Numbe of CPU threads to use, null to use maximum number
+num_workers: null            # Number of cores to use for data loader! 
+display_step: 5           # Std output update rate during training
+max_epoch: 2            # Number of steps to train
+test_epoch: 2             # Test per n step
+max_early_stop: 5         # Number of validation steps performed without improvement before the training process is stopped
+
+### Optimizer parameter
+learning_rate: 0.01
+momentum: 0.9
+weight_decay: 0.001
+batch_size: 10
+
+### Model parameter
+data_size: 2097152        # First N bytes of a PE file as the input of MalConv (defualt: 2 million)
+out_size: 2
+window_size: 500          # Kernel size & stride for Malconv (defualt : 500)
+channels: 128
+embed_size: 8
+scale_grad_by_freq: False
+train_sample_size: 0             # Number of data sampled for trianing (defualt 0 = all)
+
+### Certification parameters
+perturbation: 'DeletionMech'
+perturbation_args: []
+perturbation_kwargs: {'p_del': 0.995, 'group_insn': True, 'min_chunks': 500}
+
+### Other settings
+num_samples: 1
+valid_num_samples: 1
+non_instruction_mask: null # What value should non instruction be masked
+header: null
+
+### Tuning settings
+tune_sample_size: 1.0
+tune_num_samples: 500
+fp_steps: 2000
