@@ -1,5 +1,3 @@
-import inspect
-from functools import partial, partialmethod
 import numpy as np
 import random
 
@@ -110,43 +108,6 @@ def compute_fp_curve(
     if return_label_counts:
         out.append(label_counts)
     return out if len(out) > 1 else out[0]
-
-
-# source: https://stackoverflow.com/questions/56611213/how-to-freeze-some-arguments-over-multiple-related-class-methods
-def partial_cls_arg_pairs(cls, **kwargs):
-    """A class decorator to freeze arguments in class methods given
-    as an arg_pairs iterable of argnames with argvalues"""
-    cls_attrs = dict(cls.__dict__)
-    freezed_cls_attrs = dict()
-    for name, value in cls_attrs.items():
-        if inspect.isfunction(value):
-            for argname, argvalue in kwargs.items():
-                if argname in inspect.signature(value).parameters:
-                    print("Freezing args in {}.".format(name))
-                    value = partialmethod(value, **{argname: argvalue})
-        freezed_cls_attrs[name] = value
-
-    return type(cls.__name__, (object,), freezed_cls_attrs)
-
-
-# Modified from the above function
-def partial_obj_arg_pairs(obj, **kwargs):
-    """
-    A instance decorator to freeze arguments in instance methods given
-    as an arg_pairs iterable of argnames with argvalues.
-    This is achieved by mutating the original instance.
-    """
-    for name in dir(obj):
-        try:
-            if callable(value := getattr(obj, name)):
-                for argname, argvalue in kwargs.items():
-                    if argname in inspect.signature(value).parameters:
-                        value = partial(value, **{argname: argvalue})
-                        # print(f"Freeze: {name}({argname}={argvalue})")
-                setattr(obj, name, value)
-        except Exception as e:
-            pass
-    return obj
 
 
 def load_malconv_ckpt(path: str, seed: int = 42, train: bool = False):
