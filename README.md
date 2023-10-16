@@ -1,6 +1,6 @@
 # RS-Del: Robustness Certificates for Sequence Classifiers via Randomized Deletion
 
-![Badge](https://img.shields.io/badge/NeurIPS-2023-blue) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![Badge](https://img.shields.io/badge/NeurIPS-2023-blue)](https://nips.cc/Conferences/2023) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This repository hosts the implementation of our submission to NeurIPS 2023 titled "RS-Del: Edit Distance Robustness Certificates for Sequence Classifiers via Randomized Deletion".
 
@@ -100,7 +100,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ```bibtex
 @inproceedings{huang2023rsdel,
   author    = {Huang, Zhuoqun and Marchant, Neil and Lucas, Keane and Bauer, Lujo and Ohrimenko, Olya and Rubinstein, Benjamin I. P.},
-  title     = {RS-Del: Edit Distance Robustness Certificates for Sequence Classifiers via Randomized Deletion},
+  title     = {{RS-Del}: Edit Distance Robustness Certificates for Sequence Classifiers via Randomized Deletion},
   year      = {2023},
   booktitle = {Advances in Neural Information Processing Systems},
   series    = {NeurIPS},
