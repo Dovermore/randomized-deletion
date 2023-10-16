@@ -137,7 +137,7 @@ def compute_fp_curve(
 
 
 def load_malconv_ckpt(path: str, seed: int = 42, train: bool = False):
-    """Load the checkpoint of a saved malconv model with smoothing
+    # TODO: should this be _without_ smoothing?
     """Load the checkpoint of a saved MalConv model with smoothing
 
     Args:

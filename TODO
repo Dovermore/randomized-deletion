@@ -1,0 +1,8 @@
+* The repo name is too long in my opinion. You could call it "randomized-deletion" or "rs-del". Remember, we've de-emphasized "malware" in the NeurIPS paper.
+* pyproject.toml
+  - Fill in redacted info
+  - Update GitHub URLs.
+* README.md
+  - "Getting Started" section should probably be called "Reproducing experiments".
+  - "Reproducing experiments" section should probably be called "Datasets", since it doesn't contain instructions for reproducing the experiments.
+  - Note somewhere that we are unable to publish the datasets due to licensing restrictions. 
