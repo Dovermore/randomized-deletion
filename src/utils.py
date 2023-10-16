@@ -4,7 +4,7 @@ import random
 import torch
 from pathos.pools import ProcessPool, SerialPool
 from tqdm.auto import tqdm
-from torchmalware.certification import CertifiedMalConv, perturbations
+from torchmalware.certification import CertifiedMalConv, perturbations, RandomPerturbation
 
 from torchmalware.datasets import BinaryDataset, CSVDataset
 from torchmalware.models import MalConv
@@ -39,13 +39,39 @@ def make_dataset(data, transform=None):
 def compute_fp_curve(
     repeat_probs: torch.Tensor,
     labels: torch.Tensor,
-    perturbation,
-    steps,
-    num_workers=torch.get_num_threads(),
-    log_thresh=False,
-    return_counts=False,
-    return_label_counts=False,
+    perturbation: RandomPerturbation,
+    steps: int,
+    num_workers: int = torch.get_num_threads(),
+    log_thresh: bool = False,
+    return_counts: bool = False,
+    return_label_counts: bool = False,
 ):
+    """Estimate a false positive rate (FPR) curve for a smoothed model as a function of the 
+    decision threshold
+
+    Args:
+        repeat_probs: A tensor containing probability scores from the base model for inputs
+            perturbed by the smoothing mechanism. The 1st dimension indexes samples from the 
+            smoothing mechanism (for a given instance), the 2nd dimension indexes instances 
+            in the dataset, and the 3rd dimension indexes classes. 
+        labels: A tensor containing the true labels for each instance in the dataset.
+        perturbation: Smoothing mechanism used to perturb the inputs.
+        steps: Number of decision thresholds at which to evaluate the FPR.
+        num_workers: Number of workers to use when dividing the FPR computation for each 
+            threshold. Set to zero to disable parallelization.
+        log_thresh: If True, chooses the decision threshold grid uniformly in log space, 
+            otherwise chooses the decision threshold grid uniformly in the original space.
+        return_counts: If True, appends a tuple to the return list containing the number of 
+            false positives (for each threshold) and the number of negatives.
+        return_label_counts: If True, appends a 2d tensor to the return list containing the 
+            number of samples predicted in each class for each instance. 
+    
+    Returns:
+        A list, where the 1st entry is a tensor containing the grid of decision thresholds, 
+        and the 2nd entry is a tensor containing the corresponding false positive rates. 
+        If `return_counts` or `return_label_counts` are True, additional entries are appended 
+        to the list.
+    """
     num_samples = labels.size(0)
     num_classes = repeat_probs.size(2)
 
@@ -112,10 +138,13 @@ def compute_fp_curve(
 
 def load_malconv_ckpt(path: str, seed: int = 42, train: bool = False):
     """Load the checkpoint of a saved malconv model with smoothing
+    """Load the checkpoint of a saved MalConv model with smoothing
+
     Args:
         path (str): Path to the ckpt file
         seed (int, optional): Seed to set after loading (mainly for perturbation). Defaults to 42.
         train (bool, optional): If model/perturbation should be loaded in training mode. Defaults to False.
+    
     Returns:
         tuple: tuple of (ckpt, conf, model, transform)
     """
@@ -180,11 +209,13 @@ def load_certified_malconv_ckpt(
     load_legacy: bool = False,
     fp_ratio: float = None,
 ):
-    """Load the checkpoint of a saved malconv model with smoothing
+    """Load the checkpoint of a saved MalConv model with smoothing
+
     Args:
         path (str): Path to the ckpt file
         seed (int, optional): Seed to set after loading (mainly for perturbation). Defaults to 42.
         train (bool, optional): If model/perturbation should be loaded in training mode. Defaults to False.
+    
     Returns:
         tuple: tuple of (ckpt, conf, model, transform)
     """

@@ -1,4 +1,6 @@
-# Sample train
+# This script runs training for smoothed and non-smoothed models. The script loads all
+# parameters/configuration from a YAML file, which must be passed to the `conf` argument.
+
 import argparse
 import os
 import time

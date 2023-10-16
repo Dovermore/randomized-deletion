@@ -1,3 +1,14 @@
+# This script processes a dataset of raw PE files and saves the result to a new directory. The
+# processed dataset includes a metadata file alongside each PE file, which contains:
+#   - the address ranges that correspond to individual instructions, as determined by the Ghidra
+#     diassembler;
+#   - the address ranges that correspond to executable sections, as determined by the `pefile`
+#     Python package; and
+#   - the size of the PE header in bytes.
+# The first item in this list is used to run the deletion smoothing mechanism at the instruction-
+# level. If the smoothing mechanism is run solely at the byte-level, there is no need to run this
+# script.
+
 import os
 import torch
 from torch.utils.data import Subset

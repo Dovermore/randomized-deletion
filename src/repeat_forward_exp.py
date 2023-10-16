@@ -1,3 +1,25 @@
+# This script generates samples from the smoothing mechanism for each instance in the provided
+# dataset, then passes the samples through the base model, and records the class probability
+# scores. The resulting data can be used to estimate predictions and certified radii for the
+# smoothed model (see `certify_exp-repeat_forward.py`) or estimate a false postive rate curve
+# (see `fp_curve-repeat_forward.py`).
+#
+# The script loads the majority of the parameters (including dataset, model, number of samples)
+# from a YAML config file, passed to the `config` argument. One exception is the ability to run
+# the script on a _part_ of the provided dataset, which is useful for parallelization. This is
+# controlled by the `num-partitions` and `partition` arguments. For example, the script can be
+# run on the first 10% of instances, by setting `num-partitions=10` and `partition=1`.
+#
+# The output of the script is a dictionary containing the following keys:
+#   - 'datetime': time the computation was finished in the format %Y-%m-%d %H:%M'
+#   - 'duration': duration of the computation in seconds
+#   - 'metadata': dictionary storing the integer id, file size and class label of each instance
+#   - 'repeat_probs': 3d tensor containing the class probability scores for the partition. The
+#     1st dimension indexes samples (for a given instance), the 2nd dimension indexes instances
+#     in the partition, and the 3rd indexes classes.
+# This dictionary is pickled and dumped to a file in the save directory called
+# '{name}-{partition}_{num_partitions}.ckpt'.
+
 import argparse
 import os
 import time
