@@ -2,7 +2,7 @@
 
 [![Badge](https://img.shields.io/badge/NeurIPS-2023-blue)](https://nips.cc/Conferences/2023) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository hosts the implementation of our submission to NeurIPS 2023 titled "RS-Del: Edit Distance Robustness Certificates for Sequence Classifiers via Randomized Deletion".
+This repository hosts the implementation of NeurIPS 2023 paper ["RS-Del: Edit Distance Robustness Certificates for Sequence Classifiers via Randomized Deletion"](https://arxiv.org/abs/2302.01757). We implement `RS-Del`, a new mechanism for randomized smoothing of arbitrary black-box sequence classifiers. Input tokens are repeatedly deleted randomly; resulting base classifier inferences are aggregated to form smoothed predictions. `RS-Del`'s predictions are certifiably robust to edit-distance threat models: where an attacker may make insertions, deletions or substitutions when forming adversarial examples. The mechanism and its certifications are suitable for general sequence classifiers, with the paper exploring applications to malware classification specifically.
 
 ---
 
